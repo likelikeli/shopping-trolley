@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Document</title>
+		<link rel="stylesheet" type="text/css" href="购物车.css">
+		<link rel="stylesheet" type="text/css" href="reset.css">
+	</head>
+	<body>
+		<table class="box" border="1">
+			<tr class="header">
+				<td width="90">
+					<input type="checkbox" id="selectAll" />
+					<label for="selectAll">全选</label>
+				</td>
+				<td width="230">商品</td>
+				<td width="173">单价</td>
+				<td width="127">数量</td>
+				<td width="197">小计</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td class="check">
+					<input type="checkbox" class="checkt" />
+				</td>
+				<td class="proName">
+					<img src="" alt="" />
+					<span>佳能</span>
+				</td>
+				<td class="proPirce"> 
+					<span>100</span>
+				</td>
+				<td class="proCount">
+					<input type="button" value="-" class="ys" />
+					<input type="text" class="count" value="0" />
+					<input type="button" value="+" class="ys"/>
+				</td>
+				<td class="proMoney">
+					<span>0</span>
+				</td>
+				<td>
+					<input type="button" value="删除" class="proDel" />
+				</td>
+			</tr>
+			<tr>
+				<td class="check">
+					<input type="checkbox"  class="checkt"/>
+				</td>
+				<td class="proName">
+					<img src="" alt="" />
+					<span>佳能</span>
+				</td>
+				<td class="proPirce"> 
+					<span>200</span>
+				</td>
+				<td class="proCount">
+					<input type="button" value="-" class="ys" />
+					<input type="text" class="count" value="0" />
+					<input type="button" value="+" class="ys"/>
+				</td>
+				<td class="proMoney">
+					<span>0</span>
+				</td>
+				<td>
+					<input type="button" value="删除" class="proDel" />
+				</td>
+			</tr>
+			<tr>
+				<td class="check">
+					<input type="checkbox" class="checkt" />
+				</td>
+				<td class="proName">
+					<img src="" alt="" />
+					<span>佳能</span>
+				</td>
+				<td class="proPirce"> 
+					<span>300</span>
+				</td>
+				<td class="proCount">
+					<input type="button" value="-" class="ys" />
+					<input type="text" class="count" value="0" />
+					<input type="button" value="+" class="ys"/>
+				</td>
+				<td class="proMoney">
+					<span>0</span>
+				</td>
+				<td>
+					<input type="button" value="删除" class="proDel" />
+				</td>
+			</tr>
+			
+			<tr class="footer">
+				<td colspan="6">
+					<div class="delAll">删除所有</div>
+					<div class="proTotal">已选商品<span>0</span>件</div>
+					<div class="totalPirces">合计：￥<span>0</span></div>
+				</td>
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+	// 六个触发事件地方
+	// 全选  单选 删除 删除所有  加 减
+	// 全选
+	$("#selectAll").click(function(){
+		$(".checkt").prop("checked", this.checked);	
+		demo();
+		// change();
+	})
+	// 单选
+		$(".checkt").click(function(){
+			$("#selectAll").prop("checked",$(".checkt:checked").length == $(".checkt").length);
+			demo();
+		})
+	// 删除所有
+	$(".delAll").click(function(){
+		$(".checkt:checked").parents("tr").remove();
+		demo();
+	})
+
+	// 删除proDel
+	$(".proDel").click(function(){
+		$(this).parents("tr").remove();
+		demo();
+	})
+	// 加减proCount
+	$(".ys").click(function(){
+		var _this=this
+		var vals=($(_this).siblings(".count"))[0].value
+		$(this).val()=="-"? vals=parseInt(vals)-1:vals=parseInt(vals)+1
+		$(_this).siblings(".count").val(vals)
+		if(($(_this).siblings(".count"))[0].value<=0){
+			($(_this).siblings(".count"))[0].value=0;
+		}
+		// 改变小计proPirce
+		var moneys=parseInt($(_this).siblings(".count").val())*$(_this).parents("td").siblings(".proPirce").children("span").html()
+		$(_this).parents("td").siblings(".proMoney").children("span").html(moneys)
+		demo();
+	})
+	// 改变合计和件数
+	function demo(){
+		
+		$(".proTotal span").html($(".checkt:checked").length);
+		$(".totalPirces span").html(function(){
+			var monys=0;
+			$(".checkt:checked").parent().siblings(".proMoney").children().each(function(index, el){
+				monys += parseInt(el.innerHTML);
+			})
+			return monys;
+		})
+	}
+	</script>
+</html>

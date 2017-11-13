@@ -1,0 +1,40 @@
+table.box{
+	width: 900px;
+	height:350px;
+	margin: 50px auto;
+	border-color: #a7cbff;
+	border-collapse: collapse;
+	text-align: center;
+}
+.box tr.header td{
+	height: 32px;
+	background-color: #e2f2ff;
+	border-top: 3px solid #a7cbff;
+}
+.box tr.footer td{
+	height: 50px;
+	background-color: #eaeaea;
+}
+.box tr.footer div{
+	float: left;
+}
+.box tr.footer .delAll{
+	margin: 0px 500px 0px 50px;
+}
+.box tr.footer .proTotal{
+	margin-right: 50px;
+}
+div span{
+	color: red;
+}
+.box td .count{
+	width: 50px;
+}
+.box td input{
+	text-align: center;
+}
+
+
+
+
+
